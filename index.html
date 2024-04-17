@@ -100,19 +100,23 @@
 
   function generateProjectOptionsFromCSV(csvFile) {
     fetch(csvFile)
-      .then(response => response.text())
-      .then(data => {
-        var rows = data.split('\n');
-        var projectSelect = document.getElementById('project-type');
-        projectSelect.innerHTML = ""; // 清空已有选项
-        rows.forEach(row => {
-          var projectName = row.trim();
-          var optionElement = document.createElement('option');
-          optionElement.value = projectName;
-          optionElement.textContent = projectName;
-          projectSelect.appendChild(optionElement);
-        });
-      });
+    .then(response => response.text())
+    .then(data => {
+      // 显示CSV文件内容
+      document.getElementById('csv-content').textContent = data;
+
+      // 解析CSV文件
+      var rows = data.split('\n');
+      var headers = rows[0].split(',');
+
+      // 选择特定列和行的数据
+      var specificRow = 2; // 第三行（索引从0开始）
+      var specificColumn = 1; // 第二列（索引从0开始）
+      var specificData = rows[specificRow].split(',')[specificColumn];
+      
+      // 显示特定列行数据
+      document.getElementById('specific-data').textContent = `特定行列数据：${specificData}`;
+    });
   }
 </script>
 
