@@ -10,39 +10,59 @@
 </head>
 <body>
 <h1>项目价格计算器</h1>
-<form id="calculator-form">
-  <div>
-    <label for="project-type">请选择项目种类：</label>
-    <select id="project-type" name="project-type">
-      <option value="bathroom">浴室</option>
-      <option value="partition">隔墙</option>
-      <option value="flooring">铺地板</option>
-      <option value="plastering">批灰</option>
-      <option value="painting">刷漆</option>
-      <option value="garden">花园</option>
-      <!-- 在这里添加更多选项 -->
-    </select>
-  </div>
-  <div>
-    <label for="postal-code">请输入项目地址的邮编：</label>
-    <input type="text" id="postal-code" name="postal-code" placeholder="例如：100000">
-  </div>
-  <div>
-    <label for="area">请输入项目的面积（平方米）：</label>
-    <input type="number" id="area" name="area" min="0" step="any" placeholder="例如：50">
-  </div>
-  <div>
-    <label for="package-type">请选择服务包类型：</label><br>
-    <input type="radio" id="full-package" name="package-type" value="full-package">
-    <label for="full-package">全包</label><br>
-    <input type="radio" id="semi-package" name="package-type" value="semi-package">
-    <label for="semi-package">半包</label>
-  </div>
-  <button type="button" onclick="calculatePrice()">计算价格</button>
-</form>
-<div id="result"></div>
+<div id="step1">
+  <h2>请选择配置方式：</h2>
+  <input type="radio" id="region" name="config-type" value="region">
+  <label for="region">根据区域配置项目</label><br>
+  <input type="radio" id="profession" name="config-type" value="profession">
+  <label for="profession">根据工种配置项目</label><br>
+  <button type="button" onclick="nextStep()">下一步</button>
+</div>
+<div id="step2" style="display: none;">
+  <h2 id="step2-title"></h2>
+  <form id="calculator-form">
+    <div>
+      <label for="project-type">请选择项目种类：</label>
+      <select id="project-type" name="project-type">
+        <!-- 这里根据不同选择动态生成选项 -->
+      </select>
+    </div>
+    <div>
+      <label for="postal-code">请输入项目地址的邮编：</label>
+      <input type="text" id="postal-code" name="postal-code" placeholder="例如：100000">
+    </div>
+    <div>
+      <label for="area">请输入项目的面积（平方米）：</label>
+      <input type="number" id="area" name="area" min="0" step="any" placeholder="例如：50">
+    </div>
+    <div>
+      <label for="package-type">请选择服务包类型：</label><br>
+      <input type="radio" id="full-package" name="package-type" value="full-package">
+      <label for="full-package">全包</label><br>
+      <input type="radio" id="semi-package" name="package-type" value="semi-package">
+      <label for="semi-package">半包</label>
+    </div>
+    <button type="button" onclick="calculatePrice()">计算价格</button>
+  </form>
+  <div id="result"></div>
+</div>
 
 <script>
+  function nextStep() {
+    var configType = document.querySelector('input[name="config-type"]:checked').value;
+    var step1 = document.getElementById('step1');
+    var step2 = document.getElementById('step2');
+    if (configType === "region") {
+      document.getElementById('step2-title').innerText = "根据区域配置项目：";
+      // 在这里添加根据区域配置的项目选项
+    } else if (configType === "profession") {
+      document.getElementById('step2-title').innerText = "根据工种配置项目：";
+      // 在这里添加根据工种配置的项目选项
+    }
+    step1.style.display = "none";
+    step2.style.display = "block";
+  }
+
   function calculatePrice() {
     // 获取表单输入的值
     var projectType = document.getElementById('project-type').value;
