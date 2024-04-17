@@ -98,7 +98,7 @@
     `;
   }
 
-  function generateProjectOptionsFromCSV(csvFile) {
+  function generateProjectOptionsFromCSV(csvFile, Rows, Columns) {
     fetch(csvFile)
     .then(response => response.text())
     .then(data => {
@@ -110,16 +110,16 @@
       var headers = rows[0].split(',');
 
       // 选择特定列和行的数据
-      var specificRow = 2; // 第三行（索引从0开始）
-      var specificColumn = 1; // 第二列（索引从0开始）
+      var specificRow = Rows; // 第三行（索引从0开始）
+      var specificColumn = Columns; // 第二列（索引从0开始）
       var specificData = rows[specificRow].split(',')[specificColumn];
 
       // 找到特定行并跳过空白行
       var rowIndex = 0;
-      for (var i = 0; i < rows.length; i++) {
-        if (rows[i].trim() !== "") {
+      for (var i = 0; i < Rows.length; i++) {
+        if (Rows[i].trim() !== "") {
           if (rowIndex === specificRow) {
-            specificData = rows[i].split(',')[specificColumn];
+            specificData = Rows[i].split(',')[specificColumn];
             break;
           }
           rowIndex++;
