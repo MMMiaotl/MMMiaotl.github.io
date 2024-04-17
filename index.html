@@ -56,11 +56,11 @@
     if (configType === "region") {
       document.getElementById('step2-title').innerText = "根据区域配置项目：";
       // 从CSV文件读取并动态生成选项
-      generateProjectOptionsFromCSV("price_table.csv");
+      generateProjectOptionsFromCSV("region_projects.csv");
     } else if (configType === "profession") {
       document.getElementById('step2-title').innerText = "根据工种配置项目：";
       // 从CSV文件读取并动态生成选项
-      generateProjectOptionsFromCSV("price_table.csv");
+      generateProjectOptionsFromCSV("profession_projects.csv");
     }
     step1.style.display = "none";
     step2.style.display = "block";
@@ -68,4 +68,53 @@
 
   function goBack() {
     var step1 = document.getElementById('step1');
-    var step2 =
+    var step2 = document.getElementById('step2');
+    step1.style.display = "block";
+    step2.style.display = "none";
+  }
+
+  function calculatePrice() {
+    // 获取表单输入的值
+    var projectType = document.getElementById('project-type').value;
+    var postalCode = document.getElementById('postal-code').value;
+    var area = parseFloat(document.getElementById('area').value);
+    var packageType = document.querySelector('input[name="package-type"]:checked').value;
+
+    // 进行价格计算
+    // 在这里添加你的计算逻辑
+    // 这里只是一个示例
+    var basePrice = 1000;
+    var totalPrice = basePrice * area;
+
+    // 显示结果
+    var resultElement = document.getElementById('result');
+    resultElement.innerHTML = `
+      <h2>项目价格估算</h2>
+      <p>项目种类：${projectType}</p>
+      <p>项目地址邮编：${postalCode}</p>
+      <p>项目面积：${area} 平方米</p>
+      <p>服务包类型：${packageType}</p>
+      <p>预计价格：${totalPrice} 元</p>
+    `;
+  }
+
+  function generateProjectOptionsFromCSV(csvFile) {
+    fetch(csvFile)
+      .then(response => response.text())
+      .then(data => {
+        var rows = data.split('\n');
+        var projectSelect = document.getElementById('project-type');
+        projectSelect.innerHTML = ""; // 清空已有选项
+        rows.forEach(row => {
+          var projectName = row.trim();
+          var optionElement = document.createElement('option');
+          optionElement.value = projectName;
+          optionElement.textContent = projectName;
+          projectSelect.appendChild(optionElement);
+        });
+      });
+  }
+</script>
+
+</body>
+</html>
