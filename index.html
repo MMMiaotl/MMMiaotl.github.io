@@ -116,14 +116,14 @@
       {
         var specificData = [];
         rows.forEach(row => {
-        var columns = row.split(',');
-        if (columns.length > specificColumn) {
-          specificData.push(columns[specificColumn]);
-        }
-      });
+          var columns = row.split(',');
+          if (columns.length > specificColumn) {
+            specificData.push(columns[specificColumn]);
+          }
+        });
       } else if (specificColumn == 0)
       {
-        var specificData = rows[specificRow]
+        var specificData = rows[specificRow];
       } else
       {
         var specificData = rows[specificRow].split(',')[specificColumn]; 
