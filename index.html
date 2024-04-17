@@ -56,11 +56,11 @@
     if (configType === "region") {
       document.getElementById('step2-title').innerText = "根据区域配置项目：";
       // 从CSV文件读取并动态生成选项
-      generateProjectOptionsFromCSV("price_table.csv",0,2);
+      generateProjectOptionsFromCSV("price_table.csv",-1,1);
     } else if (configType === "profession") {
       document.getElementById('step2-title').innerText = "根据工种配置项目：";
       // 从CSV文件读取并动态生成选项
-      generateProjectOptionsFromCSV("price_table.csv",0,2);
+      generateProjectOptionsFromCSV("price_table.csv",-1,1);
     }
     step1.style.display = "none";
     step2.style.display = "block";
@@ -110,9 +110,9 @@
       var headers = rows[0].split(',');
 
       // 选择特定列和行的数据
-      var specificRow = Rows; // 第三行（索引从0开始）
-      var specificColumn = Columns; // 第二列（索引从0开始）
-      if (specificRow == 0)
+      var specificRow = Rows; //（索引从0开始）
+      var specificColumn = Columns; //（索引从0开始）
+      if (specificRow == -1)
       {
         var specificData = [];
         rows.forEach(row => {
@@ -121,7 +121,7 @@
             specificData.push(columns[specificColumn]);
           }
         });
-      } else if (specificColumn == 0)
+      } else if (specificColumn == -1)
       {
         var specificData = rows[specificRow];
       } else
