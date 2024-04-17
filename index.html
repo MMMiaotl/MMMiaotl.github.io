@@ -1,1 +1,67 @@
-I am Tianlei
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目价格计算器</title>
+<style>
+  /* 添加样式 */
+</style>
+</head>
+<body>
+<h1>项目价格计算器</h1>
+<form id="calculator-form">
+  <div>
+    <label for="project-type">请选择项目种类：</label>
+    <select id="project-type" name="project-type">
+      <option value="bathroom">浴室</option>
+      <!-- 在这里添加更多选项 -->
+    </select>
+  </div>
+  <div>
+    <label for="postal-code">请输入项目地址的邮编：</label>
+    <input type="text" id="postal-code" name="postal-code" placeholder="例如：100000">
+  </div>
+  <div>
+    <label for="area">请输入项目的面积（平方米）：</label>
+    <input type="number" id="area" name="area" min="0" step="any" placeholder="例如：50">
+  </div>
+  <div>
+    <label for="package-type">请选择服务包类型：</label><br>
+    <input type="radio" id="full-package" name="package-type" value="full-package">
+    <label for="full-package">全包</label><br>
+    <input type="radio" id="semi-package" name="package-type" value="semi-package">
+    <label for="semi-package">半包</label>
+  </div>
+  <button type="button" onclick="calculatePrice()">计算价格</button>
+</form>
+<div id="result"></div>
+
+<script>
+  function calculatePrice() {
+    // 获取表单输入的值
+    var projectType = document.getElementById('project-type').value;
+    var postalCode = document.getElementById('postal-code').value;
+    var area = parseFloat(document.getElementById('area').value);
+    var packageType = document.querySelector('input[name="package-type"]:checked').value;
+
+    // 进行价格计算
+    // 在这里添加你的计算逻辑
+    // 这里只是一个示例
+    var basePrice = 1000;
+    var totalPrice = basePrice * area;
+
+    // 显示结果
+    var resultElement = document.getElementById('result');
+    resultElement.innerHTML = `
+      <h2>项目价格估算</h2>
+      <p>项目种类：${projectType}</p>
+      <p>项目地址邮编：${postalCode}</p>
+      <p>项目面积：${area} 平方米</p>
+      <p>服务包类型：${packageType}</p>
+      <p>预计价格：${totalPrice} 元</p>
+    `;
+  }
+</script>
+</body>
+</html>
