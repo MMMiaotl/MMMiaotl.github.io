@@ -130,16 +130,16 @@
       }
 
       // 找到特定行并跳过空白行
-      var rowIndex = 0;
-      for (var i = 0; i < Rows.length; i++) {
-        if (Rows[i].trim() !== "") {
-          if (rowIndex === specificRow) {
-            specificData = Rows[i].split(',')[specificColumn];
-            break;
-          }
-          rowIndex++;
-        }
-      }
+      //var rowIndex = 0;
+      //for (var i = 0; i < Rows.length; i++) {
+        //if (Rows[i].trim() !== "") {
+          //if (rowIndex === specificRow) {
+            //specificData = Rows[i].split(',')[specificColumn];
+            //break;
+          //}
+          //rowIndex++;
+        //}
+      //}
       
       // 显示特定列行数据
       document.getElementById('specific-data').textContent = `特定行列数据：${specificData}`;
