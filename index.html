@@ -113,6 +113,18 @@
       var specificRow = 2; // 第三行（索引从0开始）
       var specificColumn = 1; // 第二列（索引从0开始）
       var specificData = rows[specificRow].split(',')[specificColumn];
+
+      // 找到特定行并跳过空白行
+      var rowIndex = 0;
+      for (var i = 0; i < rows.length; i++) {
+        if (rows[i].trim() !== "") {
+          if (rowIndex === specificRow) {
+            specificData = rows[i].split(',')[specificColumn];
+            break;
+          }
+          rowIndex++;
+        }
+      }
       
       // 显示特定列行数据
       document.getElementById('specific-data').textContent = `特定行列数据：${specificData}`;
