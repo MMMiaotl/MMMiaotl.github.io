@@ -112,7 +112,22 @@
       // 选择特定列和行的数据
       var specificRow = Rows; // 第三行（索引从0开始）
       var specificColumn = Columns; // 第二列（索引从0开始）
-      var specificData = rows[specificRow].split(',')[specificColumn];
+      if (specificRow == 0)
+      {
+        var specificData = [];
+        rows.forEach(row => {
+        var columns = row.split(',');
+        if (columns.length > specificColumn) {
+          specificData.push(columns[specificColumn]);
+        }
+      });
+      } else if (specificColumn == 0)
+      {
+        var specificData = rows[specificRow]
+      } else
+      {
+        var specificData = rows[specificRow].split(',')[specificColumn]; 
+      }
 
       // 找到特定行并跳过空白行
       var rowIndex = 0;
