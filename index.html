@@ -56,11 +56,11 @@
     if (configType === "region") {
       document.getElementById('step2-title').innerText = "根据区域配置项目：";
       // 从CSV文件读取并动态生成选项
-      generateProjectOptionsFromCSV("region_projects.csv");
+      generateProjectOptionsFromCSV("price_table.csv");
     } else if (configType === "profession") {
       document.getElementById('step2-title').innerText = "根据工种配置项目：";
       // 从CSV文件读取并动态生成选项
-      generateProjectOptionsFromCSV("profession_projects.csv");
+      generateProjectOptionsFromCSV("price_table.csv");
     }
     step1.style.display = "none";
     step2.style.display = "block";
