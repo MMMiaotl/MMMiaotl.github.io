@@ -25,9 +25,7 @@
     <div>
       <label for="project-type">请选择项目种类：</label>
       <select id="project-type" name="project-type">
-        <option value="bathroom">浴室</option>
-        <option value="garden">花园</option>
-        <!-- 这里根据不同选择动态生成选项 -->
+        <!-- 这里将通过JavaScript动态生成选项 -->
       </select>
     </div>
     <div>
@@ -57,10 +55,12 @@
     var step2 = document.getElementById('step2');
     if (configType === "region") {
       document.getElementById('step2-title').innerText = "根据区域配置项目：";
-      // 在这里添加根据区域配置的项目选项
+      // 从CSV文件读取并动态生成选项
+      generateProjectOptionsFromCSV("region_projects.csv");
     } else if (configType === "profession") {
       document.getElementById('step2-title').innerText = "根据工种配置项目：";
-      // 在这里添加根据工种配置的项目选项
+      // 从CSV文件读取并动态生成选项
+      generateProjectOptionsFromCSV("profession_projects.csv");
     }
     step1.style.display = "none";
     step2.style.display = "block";
@@ -68,35 +68,4 @@
 
   function goBack() {
     var step1 = document.getElementById('step1');
-    var step2 = document.getElementById('step2');
-    step1.style.display = "block";
-    step2.style.display = "none";
-  }
-
-  function calculatePrice() {
-    // 获取表单输入的值
-    var projectType = document.getElementById('project-type').value;
-    var postalCode = document.getElementById('postal-code').value;
-    var area = parseFloat(document.getElementById('area').value);
-    var packageType = document.querySelector('input[name="package-type"]:checked').value;
-
-    // 进行价格计算
-    // 在这里添加你的计算逻辑
-    // 这里只是一个示例
-    var basePrice = 1000;
-    var totalPrice = basePrice * area;
-
-    // 显示结果
-    var resultElement = document.getElementById('result');
-    resultElement.innerHTML = `
-      <h2>项目价格估算</h2>
-      <p>项目种类：${projectType}</p>
-      <p>项目地址邮编：${postalCode}</p>
-      <p>项目面积：${area} 平方米</p>
-      <p>服务包类型：${packageType}</p>
-      <p>预计价格：${totalPrice} 元</p>
-    `;
-  }
-</script>
-</body>
-</html>
+    var step2 =
